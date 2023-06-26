@@ -1,5 +1,9 @@
 import os, { CpuInfo } from 'os';
 
+/**
+ * Get the average CPU usage. It will take the average of all cores/threads.
+ * @returns {idle: number, total: number} - idle is the idle time, total is the total time.
+ */
 const cpuAverage = () => {
   const cpus: CpuInfo[] = os.cpus();
 

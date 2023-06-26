@@ -1,6 +1,11 @@
 import getCpuLoad from './getCpuLoad';
 import os, { CpuInfo } from 'os';
 
+/**
+ * Get performance load data.
+ * @param interval The time interval in milliseconds to get the CPU load
+ * @returns Performance load data
+ */
 const performanceLoadData = async (interval: number = 100) => {
   // Memory information in bytes
   const totalMemory = os.totalmem();
