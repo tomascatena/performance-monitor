@@ -6,7 +6,7 @@ import os, { CpuInfo } from 'os';
  * @param interval The time interval in milliseconds to get the CPU load
  * @returns Performance load data
  */
-const performanceLoadData = async (interval: number = 100) => {
+const getPerformanceLoadData = async (interval: number = 100) => {
   // Memory information in bytes
   const totalMemory = os.totalmem();
   const freeMemory = os.freemem();
@@ -44,4 +44,4 @@ const performanceLoadData = async (interval: number = 100) => {
   };
 };
 
-export default performanceLoadData;
+export default getPerformanceLoadData;

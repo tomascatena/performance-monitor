@@ -4,7 +4,7 @@ import { networkInterfaces } from 'os';
  * Get the list of internet facing MAC addresses of the device.
  * @returns {string[]} - Array of MAC addresses.
  */
-const getDeviceMacAddress = () => {
+const getDeviceMacAddress = (): (string | null)[] => {
   const netInterfaces = networkInterfaces();
 
   const internetFacingMacAddresses = Object
