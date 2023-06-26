@@ -1,0 +1,60 @@
+{
+  "env": { 
+    "browser": true,
+    "es2021": true,
+    "jest/globals": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": { "jsx": true },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "extends": [
+    "plugin:react/recommended", 
+    "standard"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "import-quotes",
+    "jest",
+    "react",
+    "react-hooks",
+    "sort-imports-es6-autofix"
+  ],
+  "settings": { "react": { "version": "detect" } },
+  "globals": { "React": true, "JSX": true },
+  // Lint ".storybook" folder (don't ignore it)
+  "ignorePatterns": ["!.storybook"],
+  "rules": {
+    "@typescript-eslint/indent": ["error", 2, {
+      "ignoredNodes": ["JSXAttribute"],
+      "offsetTernaryExpressions": true
+    }],
+    "@typescript-eslint/no-unused-vars": ["warn"],
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "camelcase": "off",
+    "comma-dangle": "off",
+    "import-quotes/import-quotes": [2, "single"],
+    "multiline-ternary": "off",
+    "no-unused-vars": "warn",
+    "no-use-before-define": "off",
+    "quotes": [2, "backtick"],
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react/jsx-closing-bracket-location": [2, "tag-aligned"],
+    "react/jsx-first-prop-new-line": [2, "multiline"],
+    "react/jsx-indent-props": [2, 2],
+    "react/jsx-max-props-per-line": [2, {
+      "maximum": 1,
+      "when": "always"
+    }],
+    "semi": [2, "always"],
+    "sort-imports-es6-autofix/sort-imports-es6": [2, {
+      "ignoreCase": false,
+      "ignoreMemberSort": false,
+      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
+    }],
+    "space-before-function-paren": "off"
+  }
+}
