@@ -1,1 +1,1 @@
-console.log('Hello from Typescript!');
+console.log('Socket.io Server');

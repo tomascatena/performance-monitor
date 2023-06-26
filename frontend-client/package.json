@@ -2,6 +2,16 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "webpack serve --config config/webpack.dev.ts",
+    "build": "webpack --config config/webpack.prod.ts",
+    "build:analyze": "webpack --config config/webpack.prod.ts --env WEBPACK_ANALYZE",
+    "lint": "eslint \"**/*.{js,ts,tsx}\" --ignore-pattern node_modules/",
+    "lint-staged": "lint-staged --config lint-staged.js",
+    "test": "jest",
+    "test:watch": "jest --watchAll",
+    "test:coverage": "jest --coverage"
+  },
   "dependencies": {
     "@emotion/babel-plugin": "^11.10.5",
     "@emotion/react": "^11.11.1",
@@ -13,37 +23,10 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
+    "socket.io-client": "^4.7.0",
     "styled-components": "^5.3.11",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
-  },
-  "scripts": {
-    "start": "webpack serve --config config/webpack.dev.ts",
-    "build": "webpack --config config/webpack.prod.ts",
-    "build:analyze": "webpack --config config/webpack.prod.ts --env WEBPACK_ANALYZE",
-    "lint": "eslint \"**/*.{js,ts,tsx}\" --ignore-pattern node_modules/",
-    "lint-staged": "lint-staged --config lint-staged.js",
-    "test": "jest",
-    "test:watch": "jest --watchAll",
-    "test:coverage": "jest --coverage"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
@@ -106,5 +89,23 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.3",
     "webpack-merge": "^5.8.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
