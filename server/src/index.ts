@@ -7,7 +7,7 @@ import { createAdapter, setupPrimary } from '@socket.io/cluster-adapter'; // mak
 import { Server } from 'socket.io';
 
 const numCPUs = availableParallelism();
-const PORT = 3000;
+const PORT = 8080;
 
 if (cluster.isPrimary) {
   console.log(`Primary ${process.pid} is running`);
