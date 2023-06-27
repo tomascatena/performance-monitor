@@ -17,6 +17,7 @@ const getPerformanceLoadData = async (interval: number = 100) => {
   const osRelease = os.release();
   const osPlatform = os.platform();
   const osArch = os.arch();
+  const hostname = os.hostname();
 
   const uptime = os.uptime();
 
@@ -37,6 +38,7 @@ const getPerformanceLoadData = async (interval: number = 100) => {
     osRelease,
     osPlatform,
     osArch,
+    hostname,
     cpuModel,
     cpuSpeed,
     numCores,

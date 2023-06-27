@@ -7,6 +7,7 @@ export type PerformanceData = {
   osRelease: string;
   osPlatform: string;
   osArch: string;
+  hostname: string;
   cpuModel: string;
   cpuSpeed: number;
   numCores: number;

@@ -1,6 +1,7 @@
 import { Container, Typography } from '@mui/material';
 import { PerformanceData, PerformanceDataState } from '@/types/performanceData';
 import { useEffect, useState } from 'react';
+import Widget from '@/components/Widget/Widget';
 import socket from './socketConnection';
 
 const App = () => {
@@ -13,13 +14,22 @@ const App = () => {
         [data.macAddress]: data,
       }));
 
-      console.log(performanceData);
+      console.log(`performanceData`, performanceData);
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Container>
+    <Container maxWidth='xl'>
       <Typography variant="h3">Performance Monitor</Typography>
+
+      {
+        Object.keys(performanceData).map((key) => (
+          <Widget
+            key={key}
+            performanceData={performanceData[key]}
+          />
+        ))
+      }
     </Container>
   );
 };
