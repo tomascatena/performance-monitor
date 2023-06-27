@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 
 const options = {
   auth: {
-    token: 'abc123', // Kind of API key
+    token: process.env.API_KEY || 'abc123',
   },
 };
 

@@ -6,10 +6,12 @@ const socketMain = (io: Server) => {
 
     switch (auth.token) { // Check for API key and filter clients into rooms
       case 'abc123':
+        console.log(`Socket ${socket.id} joined room node-clients`);
         socket.join('node-clients');
         break;
 
       case 'def456':
+        console.log(`Socket ${socket.id} joined room react-clients`);
         socket.join('react-clients');
         break;
 
@@ -25,6 +27,8 @@ const socketMain = (io: Server) => {
 
     socket.on('performanceData', (data) => {
       console.log('performanceData', data);
+
+      io.to('react-clients').emit('performanceData', data);
     });
   });
 };

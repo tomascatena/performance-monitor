@@ -1,17 +1,19 @@
 import { io } from 'socket.io-client';
 
-const socketConnection = () => {
-  const socket = io(`http://localhost:8080`);
-
-  socket.on(`connect`, () => {
-    console.log(`Connected to server`);
-  });
-
-  socket.on(`welcome`, (data) => {
-    console.log(data);
-  });
-
-  return socket;
+const options = {
+  auth: {
+    token: `def456`,
+  }
 };
 
-export default socketConnection;
+const socket = io(`http://localhost:8080`, options);
+
+socket.on(`connect`, () => {
+  console.log(`Connected to server`);
+});
+
+socket.on(`welcome`, (data) => {
+  console.log(data);
+});
+
+export default socket;

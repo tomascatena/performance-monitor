@@ -1,10 +1,10 @@
-import { availableParallelism } from 'node:os';
-import cluster from 'node:cluster';
-import http from 'node:http';
-import process from 'node:process';
-import { setupMaster, setupWorker } from '@socket.io/sticky'; // make it so a client can find its way back to the same worker
-import { createAdapter, setupPrimary } from '@socket.io/cluster-adapter'; // make it so the primary node can emit to everyone
 import { Server } from 'socket.io';
+import { availableParallelism } from 'node:os';
+import { createAdapter, setupPrimary } from '@socket.io/cluster-adapter';
+import { setupMaster, setupWorker } from '@socket.io/sticky';
+import cluster from 'node:cluster'; // make it so a client can find its way back to the same worker
+import http from 'node:http'; // make it so the primary node can emit to everyone
+import process from 'node:process';
 import socketMain from './socketMain';
 
 const numCPUs = availableParallelism();
@@ -35,11 +35,11 @@ if (cluster.isPrimary) {
   }
 
   cluster.on('exit', (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} died`);
+    console.log(`worker ${worker.process.pid} died with code: ${code}, and signal: ${signal}`);
   });
 } else {
   console.log(`Worker ${process.pid} started`);
-  
+
   const httpServer = http.createServer();
   const io = new Server(httpServer, {
     cors: {
