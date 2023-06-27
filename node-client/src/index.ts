@@ -16,7 +16,7 @@ socket.on('connect', () => {
   const performanceDataInterval = setInterval(async () => {
     const performanceData = await getPerformanceLoadData();
 
-    socket.emit('performanceData', {
+    socket.emit('performance-data', {
       ...performanceData,
       macAddress: macAddressList[0],
     });

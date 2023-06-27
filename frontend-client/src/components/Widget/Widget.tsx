@@ -1,20 +1,43 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Card, Typography } from '@mui/material';
 import { PerformanceData } from '@/types/performanceData';
 import CPU from '@/components/CPU/CPU';
 import MachineInfo from '@/components/MachineInfo/MachineInfo';
 import Memory from '@/components/Memory/Memory';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import socket from '@/socketConnection';
 
 type Props = {
   performanceData: PerformanceData;
 };
 
+type NodeClientConnectedOrNot = {
+  isAlive: boolean;
+  macAddress: string;
+};
+
 const Widget = ({ performanceData }: Props) => {
+  const [isNodeClientAlive, setIsNodeClientAlive] = useState(true);
+
+  useEffect(() => {
+    const handleClientConnected = ({ isAlive, macAddress }: NodeClientConnectedOrNot) => {
+      console.log(`node-client-connected-or-not`, { isAlive, macAddress });
+      if (performanceData.macAddress === macAddress) {
+        setIsNodeClientAlive(isAlive);
+      }
+    };
+
+    socket.on(`node-client-connected-or-not`, handleClientConnected);
+
+    // Clean up function that will run when component unmounts or performanceData changes
+    return () => {
+      socket.off(`node-client-connected-or-not`, handleClientConnected);
+    };
+  }, [performanceData.macAddress]);
+
   return (
-    <Box
+    <Card
+      elevation={3}
       sx={{
-        border: `1px solid #fff`,
-        borderRadius: `5px`,
         p: 1,
         m: 1,
       }}
@@ -25,12 +48,21 @@ const Widget = ({ performanceData }: Props) => {
           alignItems: `center`,
           gap: 1,
           justifyContent: `center`,
-          mb: 3
+          mb: 3,
+          backgroundColor: isNodeClientAlive ? `#fff` : `#f44336`,
+          color: isNodeClientAlive ? `#000` : `#fff`,
+          borderRadius: 1,
         }}
       >
         <Typography variant="h4">{performanceData.hostname}</Typography>
 
         <Typography variant="h5">({performanceData.macAddress})</Typography>
+
+        {
+          isNodeClientAlive
+            ? <Typography variant="h5">is connected</Typography>
+            : <Typography variant="h5">is offline</Typography>
+        }
       </Box>
 
       <Box
@@ -44,7 +76,7 @@ const Widget = ({ performanceData }: Props) => {
         <Memory performanceData={performanceData} />
         <MachineInfo performanceData={performanceData} />
       </Box>
-    </Box>
+    </Card>
   );
 };
 

@@ -8,13 +8,20 @@ const App = () => {
   const [performanceData, setPerformanceData] = useState<PerformanceDataState>({});
 
   useEffect(() => {
-    socket.on(`performanceData`, (data: PerformanceData) => {
+    const handlePerformanceDataUpdate = (data: PerformanceData) => {
       setPerformanceData((prevState) => ({
         ...prevState,
         [data.macAddress]: data,
       }));
-    });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    };
+
+    socket.on(`performance-data`, handlePerformanceDataUpdate);
+
+    // Clean up function that will run when component unmounts
+    return () => {
+      socket.off(`performance-data`, handlePerformanceDataUpdate);
+    };
+  }, []);
 
   return (
     <Container maxWidth='xl'>
