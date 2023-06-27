@@ -13,14 +13,17 @@ const App = () => {
         ...prevState,
         [data.macAddress]: data,
       }));
-
-      console.log(`performanceData`, performanceData);
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Container maxWidth='xl'>
-      <Typography variant="h3">Performance Monitor</Typography>
+      <Typography
+        variant="h3"
+        align="center"
+      >
+        Performance Monitor
+      </Typography>
 
       {
         Object.keys(performanceData).map((key) => (

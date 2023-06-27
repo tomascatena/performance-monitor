@@ -15,11 +15,23 @@ const Widget = ({ performanceData }: Props) => {
       sx={{
         border: `1px solid #fff`,
         borderRadius: `5px`,
-        padding: `1rem`,
-        margin: `1rem`,
+        p: 1,
+        m: 1,
       }}
     >
-      <Typography variant="h4">Widget</Typography>
+      <Box
+        sx={{
+          display: `flex`,
+          alignItems: `center`,
+          gap: 1,
+          justifyContent: `center`,
+          mb: 3
+        }}
+      >
+        <Typography variant="h4">{performanceData.hostname}</Typography>
+
+        <Typography variant="h5">({performanceData.macAddress})</Typography>
+      </Box>
 
       <Box
         sx={{
