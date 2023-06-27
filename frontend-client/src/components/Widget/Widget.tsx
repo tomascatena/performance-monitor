@@ -37,6 +37,7 @@ const Widget = ({ performanceData }: Props) => {
         sx={{
           display: `grid`,
           gridTemplateColumns: `repeat(3, 1fr)`,
+          alignItems: `start`
         }}
       >
         <CPU performanceData={performanceData} />

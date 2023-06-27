@@ -13,6 +13,8 @@ const Memory = ({ performanceData }: Props) => {
 
   drawCircle(canvasRef.current, performanceData.cpuLoad);
 
+  const toGB = (bytes: number) => bytes / 1024 / 1024 / 1024;
+
   return (
     <Box
       sx={{
@@ -28,6 +30,14 @@ const Memory = ({ performanceData }: Props) => {
         significantDigits={2}
         parameter={performanceData.memoryUsage * 100}
       />
+
+      <Typography variant="h6">
+        Free Memory: {toGB(performanceData.freeMemory).toFixed(2)} GB
+      </Typography>
+
+      <Typography variant="h6">
+        Total Memory: {toGB(performanceData.totalMemory).toFixed(2)} GB
+      </Typography>
     </Box>
   );
 };
